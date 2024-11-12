@@ -80,14 +80,14 @@ public class Author {
 
     @Override
     public String toString() {
-         return "Author{" +
-                "Nombre='" + nombre + '\'' +
-                ", Fecha de Nacimiento=" + fechaNacimiento +
-                ", Fecha de Muerte=" + fechaMuerte +
-                ", Libros=" + (books != null ? books.stream()
+         return "******************" + "\n" +
+                "Author: " + nombre + '\n' +
+                "Fecha de Nacimiento: " + fechaNacimiento + "\n" +
+                "Fecha de Muerte: " + fechaMuerte + "\n" +
+                "Libros: " + (books != null ? books.stream()
                 .map(Book::getTitulo)
-                .collect(Collectors.joining(", ")) : "N/A") +
-                '}';
+                .collect(Collectors.joining(", ")) : "N/A") + "\n" +
+                "*******************";
     }
 
 
