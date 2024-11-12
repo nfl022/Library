@@ -4,6 +4,7 @@ import com.nfl.library.model.Author;
 import com.nfl.library.model.Book;
 import com.nfl.library.model.BookData;
 import com.nfl.library.model.ResultsData;
+import com.nfl.library.repository.AuthorRepository;
 import com.nfl.library.repository.BookRepository;
 import com.nfl.library.service.ConsumeAPI;
 import com.nfl.library.service.ConvertData;
@@ -20,14 +21,17 @@ public class Main {
     private ConvertData convertData = new ConvertData();
     private List<Book> books = new ArrayList<>();
     private final String URL_BASE = "https://gutendex.com/books/?search=";
-    private BookRepository repository;
+    private final String URL_FINAL = "&sort=ascending";
+    private  final BookRepository repository;
+    private final AuthorRepository authorRepository;
     private List<Book> libros;
     List <Book> libroBuscado;
     List<Author> autorBuscado;
 
 
-    public Main(BookRepository repository) {
+    public Main(BookRepository repository, AuthorRepository authorRepository) {
         this.repository = repository;
+        this.authorRepository = authorRepository;
     }
 
     public void showMenu() {
@@ -66,7 +70,7 @@ public class Main {
 
 
             ConsumeAPI consumoAPI = new ConsumeAPI();
-            var json = consumoAPI.getData(URL_BASE + nombreLibro.replace(" ", "%20") + "&sort=ascending");
+            var json = consumoAPI.getData(URL_BASE + nombreLibro.replace(" ", "%20") + URL_FINAL);
             System.out.println(json);
 
             ConvertData convertData = new ConvertData();
@@ -85,14 +89,21 @@ public class Main {
 
 
                 List<Author> authors = bookData.autor().stream()
-                        .map(a -> new Author(a.nombre(), a.fechaNacimiento(), a.fechaMuerte()))
+                        .map(a -> {
+                            Author author = new Author(a.nombre(), a.fechaNacimiento(), a.fechaMuerte());
+                            author.getBooks().add(book);  // Add book to author's books list
+                            return author;
+                        })
                         .collect(Collectors.toList());
+
                 book.setAutores(authors);
 
                 Optional<Book> existingBook = repository.findById(book.getId());
 
                 if (existingBook.isEmpty()) {
                     repository.save(book);
+
+                    System.out.println(book);
                 } else {
                     System.out.println("El libro ya está guardado: " + book.getTitulo());
                 }
@@ -124,17 +135,15 @@ public class Main {
     }
 
     private void showSearchedAuthors() {
-        System.out.println("Escriba el nombre del autor");
-        var nombreAutor = teclado.nextLine();
-        List<Book> autorEncontrado = repository.librosPorAutor(nombreAutor);
-        if(autorEncontrado.isEmpty()){
-            System.out.println("Ningun autor encontrado");
+    List<Author> authors = authorRepository.findByAllWithBooks();
+        if (authors.isEmpty()) {
+            System.out.println("Ningun autor encontrado.");
         } else {
-            System.out.println("Libros del autor: " + nombreAutor + ": " );
-            autorEncontrado.forEach(System.out::println);
-        }
 
+            authors.forEach(author -> System.out.println(author.toString()));
+        }
     }
+
 
     private void searchAliveAuthorsByDate() {
         System.out.println("Por que fecha desea buscar?");

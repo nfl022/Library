@@ -3,7 +3,11 @@ package com.nfl.library.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "autores")
@@ -24,6 +28,9 @@ public class Author {
 
     private Integer fechaMuerte;
 
+    @ManyToMany(mappedBy = "autores", fetch = FetchType.LAZY)
+    private List<Book> books = new ArrayList<>();
+
     public Author() {
 
     }
@@ -43,6 +50,9 @@ public class Author {
     }
 
 
+    public List<Book> getBooks() {
+        return books;
+    }
 
     public String getNombre() {
         return nombre;
@@ -70,11 +80,16 @@ public class Author {
 
     @Override
     public String toString() {
-        return "Author{" +
-                "nombre='" + nombre + '\'' +
-                ", fechaNacimiento=" + fechaNacimiento +
-                ", fechaMuerte=" + fechaMuerte +
+         return "Author{" +
+                "Nombre='" + nombre + '\'' +
+                ", Fecha de Nacimiento=" + fechaNacimiento +
+                ", Fecha de Muerte=" + fechaMuerte +
+                ", Libros=" + (books != null ? books.stream()
+                .map(Book::getTitulo)
+                .collect(Collectors.joining(", ")) : "N/A") +
                 '}';
     }
+
+
 }
 

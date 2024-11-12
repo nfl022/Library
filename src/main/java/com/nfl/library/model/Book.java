@@ -17,15 +17,20 @@ public class Book {
     private String titulo;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "libros_autores",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "autores_id")
+    )
     private List<Author> autores;
 
-    @Column
+    @Column(columnDefinition = "text[]")
     private List<String> temas;
 
-    @Column
+    @Column(columnDefinition = "text[]")
     private List<String> idioma;
 
-    @Column
+    @Column(columnDefinition = "text[]")
     private List<String> categoria;
 
     public Book() {
@@ -94,10 +99,11 @@ public class Book {
                 .collect(Collectors.joining(", ")) + "\n" +
                 "Temas: " + String.join(", ", temas) + "\n" +
                 "Idioma: " + String.join(", ", idioma) + "\n" +
-                "Categoría: " + categoria.stream()
-                .filter(cat -> !cat.startsWith("Browsing"))
-                .map(cat -> cat.replace("FR ", ""))
-                .collect(Collectors.joining(", ")) + "\n" +
+                "Categoría: " +
+                (categoria != null ? categoria.stream()
+                        .filter(cat -> !cat.startsWith("Browsing"))
+                        .map(cat -> cat.replace("FR ", ""))
+                        .collect(Collectors.joining(", ")) : "N/A") + "\n" +
                 "***********";
 
 
