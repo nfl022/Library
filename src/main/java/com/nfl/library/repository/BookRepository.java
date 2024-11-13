@@ -12,8 +12,8 @@ import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-    @Query("SELECT b FROM Book b JOIN b.autores a WHERE a.nombre IN :authorNames")
-    List<Book> findByAuthorNames( List<String> authorNames);
+    @Query("SELECT b FROM Book b JOIN FETCH b.autores")
+    List<Book> findAllWithAuthors();
 
     List<Book> findByTituloContainingIgnoreCase(String nombreLibro);
 

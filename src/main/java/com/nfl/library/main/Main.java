@@ -130,7 +130,7 @@ public class Main {
 
 
     private void showSearchedBooks() {
-        libros = repository.findAll();
+        List<Book> libros = repository.findAllWithAuthors();
         libros.forEach(System.out::println);
 
     }

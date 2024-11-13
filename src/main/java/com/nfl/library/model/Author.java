@@ -29,7 +29,7 @@ public class Author {
 
     private Integer fechaMuerte;
 
-    @ManyToMany(mappedBy = "autores", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "autores", fetch = FetchType.EAGER)
     private List<Book> books = new ArrayList<>();
 
     public Author() {
