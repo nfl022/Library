@@ -79,4 +79,4 @@ Se integra con la API de Gutendex para recuperar una lista de libros y su metada
 
 - ## Desarrollador
 | <img src="https://github.com/user-attachments/assets/9ae02086-ef5d-47bc-b099-a75241b0a989" width=115><br><sub>Nelson Figueroa</sub> |
-| :---: | 
+| :---: |  
