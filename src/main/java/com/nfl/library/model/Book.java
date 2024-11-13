@@ -100,7 +100,7 @@ public class Book {
                 .collect(Collectors.joining(", ")) + "\n" +
                 "Temas: " + String.join(", ", temas) + "\n" +
                 "Idioma: " + String.join(", ", idioma) + "\n" +
-                   "Categoría: " +
+                "Categoría: " +
                 (categoria != null && !categoria.isEmpty() ?
                         categoria.stream()
                                 .map(cat -> cat.startsWith("[") && cat.endsWith("]") ?
@@ -109,6 +109,8 @@ public class Book {
                         : "N/A") +  // Fallback to "N/A" if categoria is null or empty
                 "\n" +
                 "***********";
+
+
 
 
 
