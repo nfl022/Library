@@ -76,3 +76,7 @@ Se integra con la API de Gutendex para recuperar una lista de libros y su metada
 - 🌟 Integrar más APIs de libros para una mayor cobertura.
 - 🧑‍💻 Mejorar la interfaz de usuario con un frontend web (React o Angular).
 - 🛠️ Añadir pruebas unitarias e integradas para una mayor fiabilidad.
+
+- ## Desarrollador
+| <img src="https://github.com/user-attachments/assets/9ae02086-ef5d-47bc-b099-a75241b0a989" width=115><br><sub>Nelson Figueroa</sub> |
+| :---: | 
