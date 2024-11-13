@@ -106,7 +106,7 @@ public class Book {
                                 .map(cat -> cat.startsWith("[") && cat.endsWith("]") ?
                                         cat.substring(1, cat.length() - 1) : cat)
                                 .collect(Collectors.joining(", "))
-                        : "N/A") +  // Fallback to "N/A" if categoria is null or empty
+                        : "N/A") +  
                 "\n" +
                 "***********";
 
