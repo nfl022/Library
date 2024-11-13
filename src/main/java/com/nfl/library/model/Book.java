@@ -100,11 +100,9 @@ public class Book {
                 .collect(Collectors.joining(", ")) + "\n" +
                 "Temas: " + String.join(", ", temas) + "\n" +
                 "Idioma: " + String.join(", ", idioma) + "\n" +
-                "Categoría: " +
-                (categoria != null ? categoria.stream()
-                        .filter(cat -> !cat.startsWith("Browsing"))
-                        .map(cat -> cat.replace("FR ", ""))
-                        .collect(Collectors.joining(", ")) : "N/A") + "\n" +
+                "Categoría: " + (categoria != null ? categoria.stream()
+                .map(cat -> cat.startsWith("Browsing") ? cat.replaceFirst("Browsing ", "") : cat)
+                .collect(Collectors.joining(", ")) : "N/A") + "\n" +
                 "***********";
 
 
