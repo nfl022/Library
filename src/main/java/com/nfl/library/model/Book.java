@@ -93,18 +93,20 @@ public class Book {
 
     @Override
     public String toString(){
-        return "***Libro***** \n" +
+        return "*****Libro***** \n" +
                 "Nombre: " + titulo + "\n" +
                 "Autores: " + autores.stream()
                 .map(author -> author.getNombre() + " (Nacimiento: " + author.getFechaNacimiento() + ", Muerte: " + author.getFechaMuerte() + ")")
                 .collect(Collectors.joining(", ")) + "\n" +
                 "Temas: " + String.join(", ", temas) + "\n" +
                 "Idioma: " + String.join(", ", idioma) + "\n" +
-                "Categoría: " + (categoria != null ? categoria.stream()
-                .map(cat -> cat.startsWith("Browsing") ? cat.replaceFirst("Browsing ", "") : cat)
-                .collect(Collectors.joining(", ")) : "N/A") + "\n" +
-                "***********";
-
+                "Categoría: " +
+                (categoria != null ?
+                        categoria.stream()
+                                .map(cat -> cat.startsWith("[") && cat.endsWith("]") ?
+                                        cat.substring(1, cat.length() - 1) : cat)
+                                .collect(Collectors.joining(", "))
+                        : "N/A") + "\n" +  "***********";
 
 
 
