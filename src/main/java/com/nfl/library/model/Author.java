@@ -1,4 +1,5 @@
 
+
 package com.nfl.library.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -80,7 +81,7 @@ public class Author {
 
     @Override
     public String toString() {
-         return "******************" + "\n" +
+        return "******************" + "\n" +
                 "Author: " + nombre + '\n' +
                 "Fecha de Nacimiento: " + fechaNacimiento + "\n" +
                 "Fecha de Muerte: " + fechaMuerte + "\n" +
@@ -92,4 +93,3 @@ public class Author {
 
 
 }
-

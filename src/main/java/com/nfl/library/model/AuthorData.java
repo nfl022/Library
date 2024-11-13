@@ -1,4 +1,5 @@
 
+
 package com.nfl.library.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -28,6 +29,3 @@ public record AuthorData(
                 return fechaMuerte;
         }
 }
-
-
-

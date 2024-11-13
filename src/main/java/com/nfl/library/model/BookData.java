@@ -1,3 +1,4 @@
+
 package com.nfl.library.model;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
@@ -7,12 +8,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record BookData(
-    @JsonProperty("title") String titulo,
-    Integer id,
-    @JsonProperty("authors") List<AuthorData> autor,
-    @JsonProperty ("subjects") List<String> temas ,
-    @JsonProperty("languages") List<String> idioma,
-    @JsonProperty("bookshelves")List<String> categoria
+        @JsonProperty("title") String titulo,
+        Integer id,
+        @JsonProperty("authors") List<AuthorData> autor,
+        @JsonProperty ("subjects") List<String> temas ,
+        @JsonProperty("languages") List<String> idioma,
+        @JsonProperty("bookshelves")List<String> categoria
 
 
 ){

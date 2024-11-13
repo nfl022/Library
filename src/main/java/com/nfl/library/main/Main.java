@@ -1,3 +1,4 @@
+
 package com.nfl.library.main;
 
 import com.nfl.library.model.Author;
@@ -65,53 +66,53 @@ public class Main {
 
     private void searchBooks() {
 
-            System.out.println("Escribe el nombre del libro");
-            var nombreLibro = teclado.nextLine();
+        System.out.println("Escribe el nombre del libro");
+        var nombreLibro = teclado.nextLine();
 
 
-            ConsumeAPI consumoAPI = new ConsumeAPI();
-            var json = consumoAPI.getData(URL_BASE + nombreLibro.replace(" ", "%20") + URL_FINAL);
-            System.out.println(json);
+        ConsumeAPI consumoAPI = new ConsumeAPI();
+        var json = consumoAPI.getData(URL_BASE + nombreLibro.replace(" ", "%20") + URL_FINAL);
+        System.out.println(json);
 
-            ConvertData convertData = new ConvertData();
-            var data = convertData.obtainData(json, ResultsData.class);
-            System.out.println(data);
-
-
-            for (BookData bookData : data.getResultados()) {
-
-                Book book = new Book();
-                book.setTitulo(bookData.titulo());
-                book.setId(bookData.id());
-                book.setTemas(bookData.temas());
-                book.setIdioma(bookData.idioma());
-                book.setCategoria(bookData.categoria());
+        ConvertData convertData = new ConvertData();
+        var data = convertData.obtainData(json, ResultsData.class);
+        System.out.println(data);
 
 
-                List<Author> authors = bookData.autor().stream()
-                        .map(a -> {
-                            Author author = new Author(a.nombre(), a.fechaNacimiento(), a.fechaMuerte());
-                            author.getBooks().add(book);  // Add book to author's books list
-                            return author;
-                        })
-                        .collect(Collectors.toList());
+        for (BookData bookData : data.getResultados()) {
 
-                book.setAutores(authors);
-
-                Optional<Book> existingBook = repository.findById(book.getId());
-
-                if (existingBook.isEmpty()) {
-                    repository.save(book);
-
-                    System.out.println(book);
-                } else {
-                    System.out.println("El libro ya está guardado: " + book.getTitulo());
-                }
+            Book book = new Book();
+            book.setTitulo(bookData.titulo());
+            book.setId(bookData.id());
+            book.setTemas(bookData.temas());
+            book.setIdioma(bookData.idioma());
+            book.setCategoria(bookData.categoria());
 
 
+            List<Author> authors = bookData.autor().stream()
+                    .map(a -> {
+                        Author author = new Author(a.nombre(), a.fechaNacimiento(), a.fechaMuerte());
+                        author.getBooks().add(book);  // Add book to author's books list
+                        return author;
+                    })
+                    .collect(Collectors.toList());
+
+            book.setAutores(authors);
+
+            Optional<Book> existingBook = repository.findById(book.getId());
+
+            if (existingBook.isEmpty()) {
+                repository.save(book);
+
+                System.out.println(book);
+            } else {
+                System.out.println("El libro ya está guardado: " + book.getTitulo());
             }
 
+
         }
+
+    }
 
     private void searchBookByTitle() {
         System.out.println("Escriba el nombre del libro");
@@ -124,18 +125,18 @@ public class Main {
             libroBuscado.forEach(System.out::println);
         }
 
-        }
+    }
 
 
 
     private void showSearchedBooks() {
-       libros = repository.findAll();
-       libros.forEach(System.out::println);
+        libros = repository.findAll();
+        libros.forEach(System.out::println);
 
     }
 
     private void showSearchedAuthors() {
-    List<Author> authors = authorRepository.findByAllWithBooks();
+        List<Author> authors = authorRepository.findByAllWithBooks();
         if (authors.isEmpty()) {
             System.out.println("Ningun autor encontrado.");
         } else {
@@ -177,9 +178,3 @@ public class Main {
 
 
 }
-
-
-
-
-
-

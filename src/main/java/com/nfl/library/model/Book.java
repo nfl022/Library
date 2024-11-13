@@ -1,3 +1,4 @@
+
 package com.nfl.library.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

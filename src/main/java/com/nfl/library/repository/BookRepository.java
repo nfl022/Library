@@ -1,31 +1,32 @@
-    package com.nfl.library.repository;
 
-    import com.nfl.library.model.Author;
-    import com.nfl.library.model.Book;
-    import org.springframework.data.jpa.repository.JpaRepository;
-    import org.springframework.data.jpa.repository.Query;
-    import org.springframework.stereotype.Repository;
+package com.nfl.library.repository;
 
-    import java.util.List;
-    import java.util.Optional;
+import com.nfl.library.model.Author;
+import com.nfl.library.model.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-    @Repository
-    public interface BookRepository extends JpaRepository<Book, Long> {
-        @Query("SELECT b FROM Book b JOIN b.autores a WHERE a.nombre IN :authorNames")
-        List<Book> findByAuthorNames( List<String> authorNames);
+import java.util.List;
+import java.util.Optional;
 
-        List<Book> findByTituloContainingIgnoreCase(String nombreLibro);
+@Repository
+public interface BookRepository extends JpaRepository<Book, Long> {
+    @Query("SELECT b FROM Book b JOIN b.autores a WHERE a.nombre IN :authorNames")
+    List<Book> findByAuthorNames( List<String> authorNames);
 
-        @Query("SELECT b FROM Book b JOIN b.autores a WHERE a.nombre ILIKE %:nombreAutor%")
-        List<Book>librosPorAutor (String nombreAutor);
+    List<Book> findByTituloContainingIgnoreCase(String nombreLibro);
 
-        @Query("SELECT b from Book b JOIN b.autores a WHERE a.fechaMuerte <= %:fechaAutor%")
-        List<Book> autorPorFecha( Integer fechaAutor);
+    @Query("SELECT b FROM Book b JOIN b.autores a WHERE a.nombre ILIKE %:nombreAutor%")
+    List<Book>librosPorAutor (String nombreAutor);
 
-        @Query(value = "SELECT * FROM Libros b WHERE LOWER(:lenguajeLibro) = ANY(SELECT unnest(b.idioma))", nativeQuery = true)
-        List<Book> libroPorIdioma(String lenguajeLibro);
+    @Query("SELECT b from Book b JOIN b.autores a WHERE a.fechaMuerte <= %:fechaAutor%")
+    List<Book> autorPorFecha( Integer fechaAutor);
+
+    @Query(value = "SELECT * FROM Libros b WHERE LOWER(:lenguajeLibro) = ANY(SELECT unnest(b.idioma))", nativeQuery = true)
+    List<Book> libroPorIdioma(String lenguajeLibro);
 
 
 
 
-    }
+}
