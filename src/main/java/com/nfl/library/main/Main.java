@@ -92,7 +92,7 @@ public class Main {
             List<Author> authors = bookData.autor().stream()
                     .map(a -> {
                         Author author = new Author(a.nombre(), a.fechaNacimiento(), a.fechaMuerte());
-                        author.getBooks().add(book);  // Add book to author's books list
+                        author.getBooks().add(book); 
                         return author;
                     })
                     .collect(Collectors.toList());
