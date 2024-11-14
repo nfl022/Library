@@ -44,7 +44,7 @@ Se integra con la API de Gutendex para recuperar una lista de libros y su metada
 4. **Configura las credenciales de la base de datos en `application.properties`:**
 
     ```properties
-    spring.datasource.url=jdbc:postgresql://localhost:5432/library
+    spring.datasource.url=jdbc:postgresql://localhost:****/library
     spring.datasource.username=tu-usuario
     spring.datasource.password=tu-contraseña
     ```
