@@ -1,7 +1,8 @@
 # 📚 Proyecto Library
-
+Desarrollada como parte del desafio OracleNext-ONE literAlura
 Esta aplicación permite buscar, ver y gestionar libros y autores con el poder de una integración de API, almacenamiento en base de datos y comandos fáciles de usar. 🧑‍💻  
 Se integra con la API de Gutendex para recuperar una lista de libros y su metadata, incluyendo detalles sobre autores, categorías, temas e idiomas. El sistema también permite almacenar libros y autores en una base de datos PostgreSQL.
+
 
 ## ⚡ Características
 
